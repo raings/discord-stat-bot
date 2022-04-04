@@ -8,3 +8,5 @@ client.ranks = [{ role: "923564102243196997", coin: 10 }, { role: "9235641022809
 böyle kodumuz vardır rol kısmına ilk yetkili rol id si ve coinini belirtirsiniz ben 10 yaptım rol idmi yapıştırdım
 
 sunucudaki kullanıcılar 10 coine ulaşınca belirlediğimiz rolü verir.
+
+eğerki yapamadınız discord üzerinden bana ulaşabilirsiniz :   https://discord.gg/KKst6ygyyV
