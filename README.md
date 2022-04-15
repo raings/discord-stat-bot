@@ -1,5 +1,6 @@
 # stat-bot-emojili
 Terfili stat bot
+glitch için hatalar alınabilir. visual studio code ile çalıştıra bilirsiniz.
 
 yetki terfi yükseltimi için botumuzun main bölümünde 
 
