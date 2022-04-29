@@ -13,5 +13,5 @@ sunucudaki kullanıcılar 10 coine ulaşınca belirlediğimiz rolü verir.
 eğerki yapamadınız discord üzerinden bana ulaşabilirsiniz :   https://discord.gg/KKst6ygyyV
   
 ![1234](https://user-images.githubusercontent.com/73904744/162521077-567aadb2-9b8d-42bb-98c3-5873a7048d62.PNG)
-![12345](https://user-images.githubusercontent.com/73904744/162521751-ead6986b-8c6c-4ab7-af31-80c8796088f7.PNG)
+![12](https://user-images.githubusercontent.com/73904744/166070271-a6576d4f-c8e8-4d7d-8b54-65592d142e70.PNG)
 ![123456](https://user-images.githubusercontent.com/73904744/162521790-57b3477b-cb4c-4c44-b1f8-18ebd829f09f.PNG)
