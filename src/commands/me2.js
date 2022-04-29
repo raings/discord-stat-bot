@@ -9,6 +9,7 @@ const voiceUser = require("../schemas/voiceUser");
 const voiceUserParent = require("../schemas/voiceUserParent");
 const coin = require("../schemas/coin");
 const taggeds = require("../schemas/taggeds");
+
 const messageGuild = require("../schemas/messageGuild");
 const messageGuildChannel = require("../schemas/messageGuildChannel");
 const voiceGuild = require("../schemas/voiceGuild");
@@ -30,6 +31,9 @@ module.exports = {
 	 * @returns {Promise<void>}
 	 */
 	run: async (client, message, args) => {
+       
+
+       
         let yardım = new Discord.MessageEmbed().setColor(message.member.displayHexColor).setFooter(moment(Date.now()).format("LLL")).setAuthor(message.member.displayName, message.author.avatarURL({ dynamic: true }))
         const category = async (parentsArray) => {
 			const data = await voiceUserParent.find({ guildID: message.guild.id, userID: message.author.id });
@@ -52,6 +56,9 @@ module.exports = {
           const messageGuildData = await messageGuild.findOne({ guildID: message.guild.id });
           const voiceGuildData = await voiceGuild.findOne({ guildID: message.guild.id });
       
+
+
+          
           let coinSum = 0;
       
           const messageChannels = messageChannelData.splice(0, 5).map((x, index) => `\`${index+1}.\` <#${x.channelID}>: \`${Number(x.channelData).toLocaleString()} mesaj\``).join(`\n`);
@@ -93,33 +100,67 @@ module.exports = {
 
         const maxValue = client.ranks[client.ranks.indexOf(client.ranks.find(x => x.coin >= (coinData ? coinData.coin : 0)))] || client.ranks[client.ranks.length-1];
         const taggedData = await taggeds.findOne({ guildID: message.guild.id, userID: message.author.id });
-    
-        const coinStatus = conf.staffs.some(x => message.member.roles.cache.has(x)) ? `**➥ Puan Durumu:** ${taggedData ? `\nTag aldırdığı üye sayısı: \`${taggedData.taggeds.length}\`` : ""}
+
+        const coinStatus = conf.staffs.some(x => message.member.roles.cache.has(x)) ? `**Puan Durumu** ${taggedData ? `\nTag aldırdığı üye sayısı: \`${taggedData.taggeds.length}\`` : ""}
         - Puanınız: \`${coinData ? coinData.coin : 0}\`, Gereken: \`${maxValue.coin}\` 
         ${progressBar(coinData ? coinData.coin : 0, maxValue.coin, 8)} \`${coinData ? coinData.coin : 0} / ${maxValue.coin}\`
         ${client.ranks[client.ranks.indexOf(maxValue)-1] ? `**───────────────** 
-        **➥ Yetki Durumu:** 
+        **Terfi Durumu:** 
         ${maxValue !== client.ranks[client.ranks.length-1] ? `Şu an <@&${client.ranks[client.ranks.indexOf(maxValue)-1].role}> rolündesiniz. <@&${maxValue.role}> rolüne ulaşmak için \`${maxValue.coin-coinData.coin}\` coin daha kazanmanız gerekiyor!` : "Şu an son yetkidesiniz! Emekleriniz için teşekkür ederiz."}` : `**───────────────** 
-        **➥ Yetki Durumu:** 
+        **Terfi Durumu:** 
         <@&${maxValue.role}> rolüne ulaşmak için \`${maxValue.coin - (coinData ? coinData.coin : 0)}\` coin daha kazanmanız gerekiyor!
         `}` : "";
-
+        let color, description;
+        if (message.member.lastMessageID) {
+          let lastSeen = Date.now() - message.member.lastMessage.createdTimestamp;
+          let seconds = lastSeen / 1;
+          let days = parseInt(seconds / 86400);
+          seconds = seconds % 86400;
+          let hours = parseInt(seconds / 3600);
+          seconds = seconds % 3600;
+          let minutes = parseInt(seconds / 60);
+          seconds = parseInt(seconds % 60);
+    
+          lastSeen = `${seconds} Saniye`;
+          if (days) {
+            lastSeen = `${days} Gün ${hours} Saat ${minutes} Dakika ${seconds} Saniye`;
+          } else if (hours) {
+            lastSeen = `${hours} Saat ${minutes} Dakika ${seconds} Saniye`;
+          } else if (minutes) {
+            lastSeen = `${minutes} Dakika /${seconds} Saniye`;
+          }
+        
 		yardım.setThumbnail(message.author.avatarURL({ dynamic: true, size: 2048 }));
 		yardım.setDescription(`
     ${message.author.toString()} (${message.member.roles.highest}) kişisinin sunucu verileri
-    **───────────────**
-    **➥ Ses Bilgileri:**
-    • Toplam: \`${moment.duration(voiceData ? voiceData.topStat : 0).format("H [saat], m [dakika] s [saniye]")}\`
-    • Public Odalar: \`${await category(conf.publicParents)}\`
-    • Kayıt Odaları: \`${await category(conf.registerParents)}\`
-    • Sorun Çözme & Terapi: \`${await category(conf.solvingParents)}\`
-    • Private Odalar: \`${await category(conf.privateParents)}\`
-    • Game Odalar: \`${await category(conf.aloneParents)}\`
-    • Oyun & Eğlence Odaları: \`${await category(conf.funParents)}\`
-    • Diğer: \`${await category(filteredParents.map(x => x.id))}\`   
+
+    <a:yildiz2:967888256563834941> **Kullanıcı Durumu**:
+
+    ${coinStatus}
+
+    :loud_sound: **Ses Bilgileri:**
+    \`\`\`css
+● Toplam: \`${moment.duration(voiceData ? voiceData.topStat : 0).format("H [saat], m [dakika] s [saniye]")}\`
+
+● Public Odalar: \`${await category(conf.publicParents)}\`
+● Kayıt Odaları: \`${await category(conf.registerParents)}\`
+● Sorun Çözme & Terapi: \`${await category(conf.solvingParents)}\`
+● Private Odalar: \`${await category(conf.privateParents)}\`
+● Game Odalar: \`${await category(conf.aloneParents)}\`
+● Oyun & Eğlence Odaları: \`${await category(conf.funParents)}\`
+
+● Diğer: \`${await category(filteredParents.map(x => x.id))}\`\`\`\`
+
+
+    
+   📝 **Metin Bilgileri**   
+    \`\`\`css
+● Toplam Mesaj: ${Number(messageWeekly).toLocaleString()}\`\`\`
+        
+**Son Görülme:** \`${lastSeen}\`
 
     `);
-
+        };
     var menü = await message.channel.send(yardım)
     const collector = menü.createReactionCollector(filter, { time: 99999 });
     let emojiler = ["⌚","💰","🔊"]
@@ -131,17 +172,12 @@ module.exports = {
             const Advanced = new Discord.MessageEmbed()
         .setColor("BLACK")
         .setDescription(`     
-        ${coinStatus}  
-
-        **───────────────**
-
         **➥ Sesli Kanal Bilgileri: (\`Toplam ${voiceLength} kanal\`)**
         ${voiceTop}
 
         **➥ Mesaj Bilgileri: (\`Toplam ${messageData ? messageData.topStat : 0} mesaj\`)**
         ${messageTop}
 
-        **───────────────**
 
 `)
 Advanced.addField("Ses Verileri:", `
@@ -203,5 +239,3 @@ function progressBar(value, maxValue, size) {
     
     return emptyProgress > 0 ? `<a:bar1:925699169480482826>${progressText}${emptyProgressText}<:bo3:925699169941864518>` : `<a:bar1:925699169480482826>${progressText}${emptyProgressText}<a:bar3:925699169618903060>`;
     };
-    
-
