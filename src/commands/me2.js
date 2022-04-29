@@ -101,14 +101,16 @@ module.exports = {
         const maxValue = client.ranks[client.ranks.indexOf(client.ranks.find(x => x.coin >= (coinData ? coinData.coin : 0)))] || client.ranks[client.ranks.length-1];
         const taggedData = await taggeds.findOne({ guildID: message.guild.id, userID: message.author.id });
 
-        const coinStatus = conf.staffs.some(x => message.member.roles.cache.has(x)) ? `**Puan Durumu** ${taggedData ? `\nTag aldırdığı üye sayısı: \`${taggedData.taggeds.length}\`` : ""}
+               const coinStatus = conf.staffs.some(x => message.member.roles.cache.has(x)) ? `    <a:yildiz2:968621208033693697> **Kullanıcı Durumu**:
+
+**Puan Durumu** ${taggedData ? `\nTag aldırdığı üye sayısı: \`${taggedData.taggeds.length}\`` : ""}
         - Puanınız: \`${coinData ? coinData.coin : 0}\`, Gereken: \`${maxValue.coin}\` 
         ${progressBar(coinData ? coinData.coin : 0, maxValue.coin, 8)} \`${coinData ? coinData.coin : 0} / ${maxValue.coin}\`
         ${client.ranks[client.ranks.indexOf(maxValue)-1] ? `**───────────────** 
         **Terfi Durumu:** 
-        ${maxValue !== client.ranks[client.ranks.length-1] ? `Şu an <@&${client.ranks[client.ranks.indexOf(maxValue)-1].role}> rolündesiniz. <@&${maxValue.role}> rolüne ulaşmak için \`${maxValue.coin-coinData.coin}\` coin daha kazanmanız gerekiyor!` : "Şu an son yetkidesiniz! Emekleriniz için teşekkür ederiz."}` : `**───────────────** 
+        ${maxValue !== client.ranks[client.ranks.length-1] ? `Şu an <@&${client.ranks[client.ranks.indexOf(maxValue)-1].role}> rolündesiniz. <@&${maxValue.role}> rolüne ulaşmak için \`${maxValue.coin-coinData.coin}\` coin gerekiyor!` : "Şu an son yetkidesiniz! Emekleriniz için teşekkür ederiz."}` : `**───────────────** 
         **Terfi Durumu:** 
-        <@&${maxValue.role}> rolüne ulaşmak için \`${maxValue.coin - (coinData ? coinData.coin : 0)}\` coin daha kazanmanız gerekiyor!
+        <@&${maxValue.role}> rolüne ulaşmak için \`${maxValue.coin - (coinData ? coinData.coin : 0)}\` coin gerekiyor!
         `}` : "";
         let color, description;
         if (message.member.lastMessageID) {
@@ -132,10 +134,8 @@ module.exports = {
         
 		yardım.setThumbnail(message.author.avatarURL({ dynamic: true, size: 2048 }));
 		yardım.setDescription(`
-    ${message.author.toString()} (${message.member.roles.highest}) kişisinin sunucu verileri
-
-    <a:yildiz2:967888256563834941> **Kullanıcı Durumu**:
-
+    ${message.author.toString()} (${message.member.roles.highest}) mesaj ve ses verileri
+  
     ${coinStatus}
 
     :loud_sound: **Ses Bilgileri:**
