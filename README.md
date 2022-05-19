@@ -3,15 +3,15 @@ Terfili stat bot
 
 **ALTYAPIDA HATA MEYDANA GELDİĞİNDEN DOLAYI MAVİ BARI KALDIRILDI.!**
 
-glitch için hatalar alınabilir. visual studio code ile çalıştıra bilirsiniz.
+`glitch için hatalar alınabilir. visual studio code ile çalıştıra bilirsiniz.`
 
-yetki terfi yükseltimi için botumuzun main bölümünde 
+`yetki terfi yükseltimi için botumuzun main bölümünde `
 
 client.ranks = [{ role: "923564102243196997", coin: 10 }, { role: "923564102280962120", coin: 20 }];
 
-böyle kodumuz vardır rol kısmına ilk yetkili rol id si ve coinini belirtirsiniz ben 10 yaptım rol idmi yapıştırdım
+`böyle kodumuz vardır rol kısmına ilk yetkili rol id si ve coinini belirtirsiniz ben 10 yaptım rol idmi yapıştırdım
 
-sunucudaki kullanıcılar 10 coine ulaşınca belirlediğimiz rolü verir.
+sunucudaki kullanıcılar 10 coine ulaşınca belirlediğimiz rolü verir.`
 
 eğerki yapamadınız discord üzerinden bana ulaşabilirsiniz :   https://discord.gg/KKst6ygyyV
   
