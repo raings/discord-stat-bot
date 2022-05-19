@@ -1,7 +1,7 @@
 # stat-bot-emojili
 Terfili stat bot
 
-**ALTYAPIDA HATA MEYDANA GELDİĞİNDEN DOLAYI MAVİ BARI KALDIRILDI.!
+**ALTYAPIDA HATA MEYDANA GELDİĞİNDEN DOLAYI MAVİ BARI KALDIRILDI.!**
 
 glitch için hatalar alınabilir. visual studio code ile çalıştıra bilirsiniz.
 
