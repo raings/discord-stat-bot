@@ -105,7 +105,7 @@ module.exports = {
 
 **Puan Durumu** ${taggedData ? `\nTag aldırdığı üye sayısı: \`${taggedData.taggeds.length}\`` : ""}
         - Puanınız: \`${coinData ? coinData.coin : 0}\`, Gereken: \`${maxValue.coin}\` 
-        ${progressBar(coinData ? coinData.coin : 0, maxValue.coin, 8)} \`${coinData ? coinData.coin : 0} / ${maxValue.coin}\`
+        \`${coinData ? coinData.coin : 0} / ${maxValue.coin}\`
         ${client.ranks[client.ranks.indexOf(maxValue)-1] ? `**───────────────** 
         **Terfi Durumu:** 
         ${maxValue !== client.ranks[client.ranks.length-1] ? `Şu an <@&${client.ranks[client.ranks.indexOf(maxValue)-1].role}> rolündesiniz. <@&${maxValue.role}> rolüne ulaşmak için \`${maxValue.coin-coinData.coin}\` coin gerekiyor!` : "Şu an son yetkidesiniz! Emekleriniz için teşekkür ederiz."}` : `**───────────────** 
@@ -230,12 +230,4 @@ if(reaction.emoji.name == "⌚") {
 
 
 
-function progressBar(value, maxValue, size) {
-    const progress = Math.round(size * ((value / maxValue) > 1 ? 1 : (value / maxValue)));
-    const emptyProgress = size - progress > 0 ? size - progress : 0;
-    
-    const progressText = "<a:bar2:925699169677611058>".repeat(progress);
-    const emptyProgressText = "<:bo2:925699169669230632>".repeat(emptyProgress);
-    
-    return emptyProgress > 0 ? `<a:bar1:925699169480482826>${progressText}${emptyProgressText}<:bo3:925699169941864518>` : `<a:bar1:925699169480482826>${progressText}${emptyProgressText}<a:bar3:925699169618903060>`;
-    };
+
